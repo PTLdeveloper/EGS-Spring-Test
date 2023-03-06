@@ -8,6 +8,4 @@ import datamodel.Customer;
 @EntityScan("datamodel")
 public interface CustomerRepository extends CrudRepository<Customer, String> {
 
-	Customer findByCustomerRef(String customerRef);
-
 }

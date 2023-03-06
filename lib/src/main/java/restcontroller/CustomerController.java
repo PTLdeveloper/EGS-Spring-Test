@@ -1,5 +1,7 @@
 package restcontroller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,7 +19,12 @@ public class CustomerController {
 
 	@GetMapping("/getCustomer/{customerRef}")
 	public Customer retrieve(@PathVariable String customerRef) {
-		return customerRepository.findByCustomerRef(customerRef);
+		Optional<Customer> customer = customerRepository.findById(customerRef);
+
+		if (customer.isPresent()) {
+			return customer.get();
+		}
+		return null;
 	}
 
 	@PostMapping(value = "/insertCustomer", consumes = "application/json", produces = "application/json")
